@@ -76,10 +76,10 @@ def main():
     if args['import']:
         import os.path
         zn = args['<zonename>']
-        zonenname = zn if zn else basename(zonefile)
+        zonename = zn if zn else os.path.basename(zonefile)
         log("beginning zone upload of {} with file {}".format(zonename,zonefile))
         with open(zonefile) as f:
-            print(client.post('/domain/zone/{}/import',zoneFile=f.read()))
+            print(client.post('/domain/zone/{}/import'.format(zonename),zoneFile=f.read()))
     elif args['export']:
         print(client.get('/domain/zone/{}/export'.format(args['<zonename>'])))
 
