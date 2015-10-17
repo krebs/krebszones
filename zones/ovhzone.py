@@ -16,10 +16,10 @@
 
     if --config is not given the script will fall back to environment variables
     with the same keys as the config file.
+    Configuration file can be set via OVH_ZONE_CONFIG.
 
     if the zonefile basename is different from the zonename then an additional
     zonename can be provided as second parameter
-
 
     To create a new Application, go to https://eu.api.ovh.com/createApp/
     then configure either environment or configuration file with the app key
@@ -49,7 +49,7 @@ def main():
     from docopt import docopt
     args=docopt(__doc__)
     zonefile = args['<zonefile>']
-    cfgfile= args['--config']
+    cfgfile= args['--config'] or os.environ.get('OVH_ZONE_CONFIG',None)
 
     if not cfgfile:
         log("using environment vars")
